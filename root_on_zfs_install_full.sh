@@ -197,8 +197,8 @@ permit persist keepenv :wheel
 EOF
 
 cat << EOF >> /etc/rc.locale
-ip link set dev enp34s0 up
-ip addr add 10.0.1.126/24 brd + dev enp34s0
-ip route add default via 10.0.1.253
+#ip link set dev enp34s0 up
+#ip addr add 10.0.1.126/24 brd + dev enp34s0
+#ip route add default via 10.0.1.253
 EOF
 CHROOT
