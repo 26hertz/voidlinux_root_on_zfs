@@ -66,17 +66,17 @@ sed -e 's/\s*\([-+0-9a-zA-Z]*\).*/\1/' << EOF | fdisk ${DEV}
   q       # quit
 EOF
 
-#wipefs -a ${DEV}p1
-#wipefs -a ${DEV}p2
+#wipefs -a ${DEV}1
+#wipefs -a ${DEV}2
 sync
-mkfs.vfat -F32 ${DEV}p2
+mkfs.vfat -F32 ${DEV}2
 
 zpool create -f -o ashift=12 -o autotrim=on \
        -O acltype=posixacl -O canmount=off -O compression=lz4 \
        -O dnodesize=auto -O normalization=formD -O relatime=on -O xattr=sa \
        -O mountpoint=/ -R /mnt \
        -O encryption=aes-256-gcm -O keylocation=prompt -O keyformat=passphrase \
-       ${POOL} ${DEV}p1 << EOF
+       ${POOL} ${DEV}1 << EOF
 ${POOL_PW}
 ${POOL_PW}
 EOF
@@ -160,7 +160,7 @@ zgenhostid
 zfs set org.zfsbootmenu:commandline="spl_hostid=$(hostid) zfs.zfs_arc_min=268435456 zfs.zfs_arc_max=536870912 ro quiet" ${POOL}/ROOT
 
 cat << EOF >> /etc/fstab
-UUID=$(blkid | grep ${DEV}p2 | sed -En 's/.*? UUID="([0-9a-zA-Z\-]+)".*/\1/p') /boot/efi vfat defaults,noauto 0 0
+UUID=$(blkid | grep ${DEV}2 | sed -En 's/.*? UUID="([0-9a-zA-Z\-]+)".*/\1/p') /boot/efi vfat defaults,noauto 0 0
 EOF
 mkdir -p /boot/efi
 mount /boot/efi
