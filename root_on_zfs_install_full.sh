@@ -185,7 +185,6 @@ EOF
 zfs create ${POOL}/home/sysops
 useradd -G wheel,users -s /bin/bash sysops
 cp -a /etc/skel/. /home/sysops
-chown -R sysops:sysops /home/sysops
 chsh -s /usr/bin/fish sysops
 passwd sysops << EOF
 sysops
@@ -208,3 +207,8 @@ EOF
 xbps-query -L
 
 CHROOT
+
+chown -R sysops:sysops /mnt/home/sysops
+
+#umount -Rl /mnt
+#zpool export ${POOL}
