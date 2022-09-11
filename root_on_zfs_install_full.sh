@@ -201,4 +201,10 @@ cat << EOF >> /etc/rc.locale
 #ip addr add 10.0.1.126/24 brd + dev enp34s0
 #ip route add default via 10.0.1.253
 EOF
+
+cat << EOF > /etc/xbps.d/00-repository-main.conf
+repository=https://mirrors.tuna.tsinghua.edu.cn/voidlinux/current
+EOF
+xbps-query -L
+
 CHROOT
