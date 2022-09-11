@@ -176,6 +176,7 @@ cat << EOF > /boot/efi/EFI/void/refind_linux.conf
 "Boot to menu"  "zfsbootmenu:ROOT=${POOL} spl_hostid=$(hostid) zfs.zfs_arc_min=268435456 zfs.zfs_arc_max=536870912 timeout=-1 ro quiet loglevel=5 nowatchdog"
 EOF
 
+chsh -s /usr/bin/fish root
 passwd << EOF
 ${ROOT_PW}
 ${ROOT_PW}
@@ -185,6 +186,7 @@ zfs create ${POOL}/home/sysops
 useradd -G wheel,users -s /bin/bash sysops
 cp -a /etc/skel/. /home/sysops
 chown -R sysops:sysops /home/sysops
+chsh -s /usr/bin/fish sysops
 passwd sysops << EOF
 sysops
 sysops
