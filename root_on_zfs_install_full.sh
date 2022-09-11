@@ -53,11 +53,11 @@ sed -e 's/\s*\([-+0-9a-zA-Z]*\).*/\1/' << EOF | fdisk ${DEV}
   n       # new partition
   1       # partition nr 1
           # start at first sector
-  -1024M  # leave 64M space
+  -1024M  # leave 1G space for /boot/efi
   n       # new partition
   2       # partition nr 2
           # start at first free sector
-          # take all empty space (64MiB)
+          # take all empty space (1024MiB)
   t       # set partition type
   2       # parition nr 2
   1       # set to EFI type
